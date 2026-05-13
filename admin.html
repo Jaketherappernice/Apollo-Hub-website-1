@@ -140,29 +140,47 @@
         const statusMsg = document.getElementById('status-msg');
 
         btnAdd.addEventListener('click', async () => {
-            const name = document.getElementById('scammer-name').value;
-            const imageUrl = document.getElementById('scammer-image').value;
-            const redirectUrl = document.getElementById('scammer-url').value;
+    const name = document.getElementById('scammer-name').value;
+    const imageUrl = document.getElementById('scammer-image').value;
+    const redirectUrl = document.getElementById('scammer-url').value;
 
-            if(!name || !imageUrl || !redirectUrl) {
-                statusMsg.style.color = "red";
-                statusMsg.innerText = "Please fill in all fields.";
-                return;
-            }
+    if(!name || !imageUrl || !redirectUrl) {
+        statusMsg.style.color = "red";
+        statusMsg.innerText = "Please fill in all fields.";
+        return;
+    }
 
-            try {
-                statusMsg.style.color = "yellow";
-                statusMsg.innerText = "Uploading...";
-                
-                await addDoc(scammerCol, {
-                    name: name,
-                    imageUrl: imageUrl,
-                    redirectUrl: redirectUrl,
-                    timestamp: new Date()
-                });
+    statusMsg.style.color = "yellow";
+    statusMsg.innerText = "Uploading...";
 
-                statusMsg.style.color = "#00ff00";
-                statusMsg.innerText = "Successfully added to Scammer Hub!";
+    try {
+        // Add timeout to catch hanging requests
+        const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Request timed out after 30s")), 30000)
+        );
+        
+        const addPromise = addDoc(scammerCol, {
+            name: name,
+            imageUrl: imageUrl,
+            redirectUrl: redirectUrl,
+            timestamp: new Date()
+        });
+
+        await Promise.race([addPromise, timeoutPromise]);
+
+        statusMsg.style.color = "#00ff00";
+        statusMsg.innerText = "Successfully added!";
+        
+        document.getElementById('scammer-name').value = '';
+        document.getElementById('scammer-image').value = '';
+        document.getElementById('scammer-url').value = '';
+        
+    } catch (error) {
+        console.error("Full error:", error);
+        statusMsg.style.color = "red";
+        statusMsg.innerText = "Error: " + error.message;
+    }
+});
                 
                 // Clear inputs
                 document.getElementById('scammer-name').value = '';
