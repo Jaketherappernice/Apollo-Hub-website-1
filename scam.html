@@ -11,6 +11,7 @@
         textarea { resize: none; box-sizing: border-box; padding: 10px; }
         button { cursor: pointer; transition: transform 0.1s; background-size: cover; background-position: center; }
         button:active { transform: scale(0.98); }
+        .scammer-entry { display:flex; align-items:center; gap:12px; padding:10px; border-bottom:1px solid rgba(0,0,0,0.1); }
         @media (min-width: 601px) { #site-canvas { width: 100%; } #el-0 { left:1.5625%; top:6px; width:31.0698%; height:69.1302px; z-index:40 !important; opacity:1; }
 #el-0 > * { font-size:44px !important; }
 #el-1 { left:-22.1094%; top:148px; width:26.5088%; height:399.353px; z-index:40 !important; opacity:1; }
@@ -62,115 +63,73 @@
     </style>
 </head>
 <body>
-    <div id="site-canvas">
-        <div id="el-0" class="dropped-element">
-            <h2 style="font-size: 44px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">𝚂𝚌𝚊𝚖𝚖𝚎𝚛 𝙷𝚞𝚋</h2>
-        </div>
-        <div id="el-1" class="dropped-element">
-            <p style="font-size: 47px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Please enable desktop mode for the best experience</p>
-        </div>
-        <div id="el-2" class="dropped-element">
-            <div id="scammer-list" style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px; display: flex; flex-direction: column; gap: 15px; padding: 20px; overflow-y: auto; box-sizing: border-box;"></div>
-        </div>
-        <div id="el-3" class="dropped-element">
-            <div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div>
-        </div>
-        <div id="el-4" class="dropped-element">
-            <h2 style="font-size: 55px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Scammers</h2>
-        </div>
-        <div id="el-5" class="dropped-element">
-            <h2 style="font-size: 53px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">ဗီူဗီူ</h2>
-        </div>
-        <div id="el-6" class="dropped-element">
-            <div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;">/// container name of the Scammer</div>
-        </div>
-        <div id="el-7" class="dropped-element">
-            <h2 style="font-size: 46px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">1. /// Scammer name here</h2>
-        </div>
-        <div id="el-8" class="dropped-element" id="btn-search">
-            <button style="background: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.Iq8LKG4uOJly28kbKJvmKwHaFj%3Fpid%3DApi&amp;f=1&amp;ipt=c7f6b755e0840548dfad173d73f4d5c95161129f966b096d6494a5e407e5c2f0&amp;ipo=images&quot;) 0% 0% / cover rgb(79, 70, 229); color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 29px;" onclick="window.location.href='https:///// redirect link'">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
-        </div>
-        <div id="el-9" class="dropped-element">
-            <img src="https://via.placeholder.com/150" style="border-radius: 12px; width: 100%; height: 100%;">
-        </div>
-        <div id="el-10" class="dropped-element" id="search-box">
-            <textarea placeholder="Enter text..." style="border: 1px solid rgb(204, 204, 204); border-radius: 12px; padding: 10px; width: 100%; height: 100%; resize: none; font-size: 14px; background-image: url(&quot;   &quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;"></textarea>
-        </div>
-        <div id="el-11" class="dropped-element">
-            <div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div>
-        </div>
-        <div id="el-12" class="dropped-element">
-            <button style="background: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.0KdLlMlStFZ0B0USCObivAHaEk%3Fpid%3DApi&amp;f=1&amp;ipt=05455448d2ed135438a4d56f9e7a141d0335ac31cca8deec0a1488da7c41d2f0&amp;ipo=images&quot;) 0% 0% / cover rgb(79, 70, 229); color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 43px;" onclick="window.location.href='https://search button'">⌕</button>
-        </div>
-        <div id="el-13" class="dropped-element">
-            <p style="font-size: 16px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.T8svX71cIDRJeBvA6aA3SwHaEK%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=831e8c5e63aa235c379a9681fb3457c5d66984f1b7865b507d1be7dc19d60850&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">## Scammer Hub: A Digital Shield Against Fraud  <br><br>In today's interconnected world, scams have become increasingly sophisticated, targeting unsuspecting individuals across social media, e-commerce platforms, and everyday online interactions. The **Scammer Hub website**, developed by **Apollo Hub**, stands as a proactive response to this growing threat. Its mission is simple yet powerful: to list and expose scammers, giving the public a reliable resource to identify and avoid fraudulent schemes.  <br><br>By compiling names, profiles, and reports of known scammers, Scammer Hub creates a community-driven database that empowers users to protect themselves. This transparency not only deters malicious actors but also fosters accountability in digital spaces. Unlike scattered warnings on forums or social media posts, Scammer Hub centralizes information, making it accessible and easy to navigate.  <br><br>The platform's value lies in its dual role: it educates users about common scam tactics while also serving as a watchdog that documents real cases. In doing so, it transforms frustration and loss into collective awareness. Apollo Hub's initiative reflects a broader commitment to digital safety, ensuring that individuals can engage online with greater confidence.  <br><br>Ultimately, Scammer Hub is more than a website—it is a safeguard for communities navigating the digital age. By shining a light on deception, it helps build a culture of vigilance and trust, proving that technology can be wielded not just for connection, but for protection.</p>
-        </div>
-    </div>
+<div id="site-canvas">
+    <div id="el-0" class="dropped-element"><h2 style="font-size: 44px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">𝚂𝚌𝚊𝚖𝚖𝚎𝚛 𝙷𝚞𝚋</h2></div>
+    <div id="el-1" class="dropped-element"><p style="font-size: 47px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Please enable desktop mode for the best experience</p></div>
+    <div id="el-2" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
+    <div id="el-3" class="dropped-element"><div id="scammer-list" style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px; overflow-y: auto;"></div></div>
+    <div id="el-4" class="dropped-element"><h2 style="font-size: 55px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Scammers</h2></div>
+    <div id="el-5" class="dropped-element"><h2 style="font-size: 53px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">ဗီူဗီူ</h2></div>
+    <div id="el-6" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
+    <div id="el-7" class="dropped-element"><h2 style="font-size: 46px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">1. /// Scammer name here</h2></div>
+    <div id="el-8" class="dropped-element"><button style="background: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.Iq8LKG4uOJly28kbKJvmKwHaFj%3Fpid%3DApi&amp;f=1&amp;ipt=c7f6b755e0840548dfad173d73f4d5c95161129f966b096d6494a5e407e5c2f0&amp;ipo=images&quot;) 0% 0% / cover rgb(79, 70, 229); color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 29px;">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button></div>
+    <div id="el-9" class="dropped-element"><img src="https://via.placeholder.com/150" style="border-radius: 12px; width: 100%; height: 100%;"></div>
+    <div id="el-10" class="dropped-element"><textarea id="search-box" placeholder="Search scammer..." style="border: 1px solid rgb(204, 204, 204); border-radius: 12px; padding: 10px; width: 100%; height: 100%; resize: none; font-size: 14px;"></textarea></div>
+    <div id="el-11" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
+    <div id="el-12" class="dropped-element"><button id="btn-search" style="background: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.0KdLlMlStFZ0B0USCObivAHaEk%3Fpid%3DApi&amp;f=1&amp;ipt=05455448d2ed135438a4d56f9e7a141d0335ac31cca8deec0a1488da7c41d2f0&amp;ipo=images&quot;) 0% 0% / cover rgb(79, 70, 229); color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 43px;">⌕</button></div>
+    <div id="el-13" class="dropped-element"><p style="font-size: 16px; color: rgb(0, 0, 0); background-image: url(&quot;https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.T8svX71cIDRJeBvA6aA3SwHaEK%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=831e8c5e63aa235c379a9681fb3457c5d66984f1b7865b507d1be7dc19d60850&amp;ipo=images&quot;); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">## Scammer Hub: A Digital Shield Against Fraud  <br><br>In today's interconnected world, scams have become increasingly sophisticated, targeting unsuspecting individuals across social media, e-commerce platforms, and everyday online interactions. The <strong>Scammer Hub website</strong>, developed by <strong>Apollo Hub</strong>, stands as a proactive response to this growing threat. Its mission is simple yet powerful: to list and expose scammers, giving the public a reliable resource to identify and avoid fraudulent schemes.  <br><br>By compiling names, profiles, and reports of known scammers, Scammer Hub creates a community-driven database that empowers users to protect themselves. This transparency not only deters malicious actors but also fosters accountability in digital spaces. Unlike scattered warnings on forums or social media posts, Scammer Hub centralizes information, making it accessible and easy to navigate.  <br><br>The platform's value lies in its dual role: it educates users about common scam tactics while also serving as a watchdog that documents real cases. In doing so, it transforms frustration and loss into collective awareness. Apollo Hub's initiative reflects a broader commitment to digital safety, ensuring that individuals can engage online with greater confidence.  <br><br>Ultimately, Scammer Hub is more than a website—it is a safeguard for communities navigating the digital age. By shining a light on deception, it helps build a culture of vigilance and trust, proving that technology can be wielded not just for connection, but for protection.</p></div>
+</div>
 
-    <!-- Firebase CDN Scripts -->
-    <script type="module">
-        // Firebase initialization
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyDY_qdBhl3OV_Poxw4hUinGkuaVudybQEU",
-            authDomain: "scammer-hubby.firebaseapp.com",
-            projectId: "scammer-hubby",
-            storageBucket: "scammer-hubby.firebasestorage.app",
-            messagingSenderId: "343577013334",
-            appId: "1:343577013334:web:9d495ca0342ea3972f1ff7",
-            measurementId: "G-NCR9S5LLFE"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyDY_qdBhl3OV_Poxw4hUinGkuaVudybQEU",
+        authDomain: "scammer-hubby.firebaseapp.com",
+        projectId: "scammer-hubby",
+        storageBucket: "scammer-hubby.firebasestorage.app",
+        messagingSenderId: "343577013334",
+        appId: "1:343577013334:web:9d495ca0342ea3972f1ff7",
+        measurementId: "G-NCR9S5LLFE"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const scammerCol = collection(db, "scammers");
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const scammerCol = collection(db, "scammers");
 
-        // DOM Elements
-        const listElement = document.getElementById('scammer-list');
-        const searchBtn = document.getElementById('btn-search');
-        const searchBox = document.getElementById('search-box');
+    const listElement = document.getElementById('scammer-list');
+    const searchBtn = document.getElementById('btn-search');
+    const searchBox = document.getElementById('search-box');
 
-        let allScammers = [];
+    let allScammers = [];
 
-        // Real-time listener for Firestore data
-        onSnapshot(scammerCol, (snapshot) => {
-            allScammers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-            displayScammers(allScammers);
+    onSnapshot(scammerCol, (snapshot) => {
+        allScammers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        displayScammers(allScammers);
+    });
+
+    function displayScammers(scammers) {
+        listElement.innerHTML = '';
+        scammers.forEach((scammer, index) => {
+            const card = document.createElement('div');
+            card.className = 'scammer-entry';
+            card.innerHTML = `
+                <img src="${scammer.imageUrl || 'https://via.placeholder.com/150'}" style="width:100px; height:100px; border-radius:12px; object-fit:cover;">
+                <div style="flex-grow:1;">
+                    <h2 style="font-size:24px; margin:0 0 10px 0;">${index + 1}. ${scammer.name}</h2>
+                    <button onclick="window.open('${scammer.redirectUrl}', '_blank')" style="background:#4f46e5; color:white; padding:10px 15px; border-radius:8px; width:auto; height:auto; cursor:pointer;">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
+                </div>
+            `;
+            listElement.appendChild(card);
         });
+    }
 
-        // Function to render scammer list
-        function displayScammers(scammers) {
-            listElement.innerHTML = '';
-            scammers.forEach((scammer, index) => {
-                const card = document.createElement('div');
-                card.className = 'scammer-entry';
-                card.style.cssText = 'display: flex; align-items: center; gap: 15px; padding: 15px; background: rgba(255,255,255,0.8); border-radius: 12px; border: 1px solid #ddd;';
-                card.innerHTML = `
-                    <img src="${scammer.imageUrl || 'https://via.placeholder.com/150'}" style="width:80px; height:80px; border-radius:12px; object-fit:cover; flex-shrink: 0;">
-                    <div style="flex-grow:1;">
-                        <h3 style="font-size:20px; margin:0 0 8px 0; color: #333;">${index + 1}. ${scammer.name}</h3>
-                        <button onclick="window.open('${scammer.redirectUrl}', '_blank')" style="background:#4f46e5; color:white; padding:8px 16px; border:none; border-radius:8px; cursor:pointer; font-size:14px; width:auto; height:auto;">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
-                    </div>
-                `;
-                listElement.appendChild(card);
-            });
-        }
-
-        // Search functionality
-        searchBtn.addEventListener('click', () => {
-            const term = searchBox.value.toLowerCase();
-            const filtered = allScammers.filter(s => s.name.toLowerCase().includes(term));
-            displayScammers(filtered);
-        });
-
-        // Allow Enter key for search
-        searchBox.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                searchBtn.click();
-            }
-        });
-    </script>
+    searchBtn.addEventListener('click', () => {
+        const term = searchBox.value.toLowerCase();
+        const filtered = allScammers.filter(s => s.name.toLowerCase().includes(term));
+        displayScammers(filtered);
+    });
+</script>
 </body>
 </html>
