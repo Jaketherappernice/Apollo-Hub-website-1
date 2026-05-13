@@ -12,30 +12,30 @@
         button { cursor: pointer; transition: transform 0.1s; background-size: cover; background-position: center; }
         button:active { transform: scale(0.98); }
         
-        /* New style for the scrollable container el-3 */
         #el-3 { overflow-y: auto; display: block !important; padding: 10px; }
         .scammer-card { position: relative; width: 100%; height: 273px; margin-bottom: 20px; }
 
-        @media (min-width: 601px) { #site-canvas { width: 100%; } #el-0 { left:2.0313%; top:22px; width:31.0698%; height:69.1302px; z-index:40 !important; opacity:1; }
-#el-0 > * { font-size:44px !important; }
-#el-1 { left:-22.1094%; top:148px; width:26.5088%; height:399.353px; z-index:40 !important; opacity:1; }
-#el-1 > * { font-size:47px !important; }
-#el-2 { left:-26.1719%; top:552px; width:25.7333%; height:569.78px; z-index:10 !important; opacity:1; }
-#el-3 { left:37.5781%; top:149px; width:58.1416%; height:1506.34px; z-index:10 !important; opacity:1; }
-#el-4 { left:41.0156%; top:200px; width:24.2505%; height:65.1177px; z-index:40 !important; opacity:1; }
-#el-4 > * { font-size:55px !important; }
-#el-5 { left:64.3750%; top:180px; width:7.5620%; height:115.79px; z-index:40 !important; opacity:1; }
-#el-5 > * { font-size:53px !important; }
-/* Original Scammer components now inside the dynamic list logic, so we hide the static ones */
-#el-6, #el-7, #el-8, #el-9 { display: none !important; }
-#el-10 { left:43.9063%; top:304px; width:37.3073%; height:52.0078px; z-index:40 !important; opacity:1; }
-#el-10 > * { font-size:14px !important; }
-#el-11 { left:3.0469%; top:200px; width:25.1323%; height:1365.53px; z-index:10 !important; opacity:1; }
-#el-12 { left:83.6719%; top:284px; width:9.5500%; height:84.675px; z-index:30 !important; opacity:1; }
-#el-12 > * { font-size:43px !important; }
-#el-13 { left:6.4062%; top:278px; width:17.4629%; height:1253.97px; z-index:40 !important; opacity:1; overflow-y: auto; }
-#el-13 > * { font-size:16px !important; }
- }
+        @media (min-width: 601px) { 
+            #site-canvas { width: 100%; } 
+            #el-0 { left:2.0313%; top:22px; width:31.0698%; height:69.1302px; z-index:40 !important; opacity:1; }
+            #el-0 > * { font-size:44px !important; }
+            #el-1 { left:-22.1094%; top:148px; width:26.5088%; height:399.353px; z-index:40 !important; opacity:1; }
+            #el-1 > * { font-size:47px !important; }
+            #el-2 { left:-26.1719%; top:552px; width:25.7333%; height:569.78px; z-index:10 !important; opacity:1; }
+            #el-3 { left:37.5781%; top:149px; width:58.1416%; height:1506.34px; z-index:10 !important; opacity:1; }
+            #el-4 { left:41.0156%; top:200px; width:24.2505%; height:65.1177px; z-index:40 !important; opacity:1; }
+            #el-4 > * { font-size:55px !important; }
+            #el-5 { left:64.3750%; top:180px; width:7.5620%; height:115.79px; z-index:40 !important; opacity:1; }
+            #el-5 > * { font-size:53px !important; }
+            #el-6, #el-7, #el-8, #el-9 { display: none !important; }
+            #el-10 { left:43.9063%; top:304px; width:37.3073%; height:52.0078px; z-index:40 !important; opacity:1; }
+            #el-10 > * { font-size:14px !important; }
+            #el-11 { left:3.0469%; top:200px; width:25.1323%; height:1365.53px; z-index:10 !important; opacity:1; }
+            #el-12 { left:83.6719%; top:284px; width:9.5500%; height:84.675px; z-index:30 !important; opacity:1; }
+            #el-12 > * { font-size:43px !important; }
+            #el-13 { left:6.4062%; top:278px; width:17.4629%; height:1253.97px; z-index:40 !important; opacity:1; overflow-y: auto; }
+            #el-13 > * { font-size:16px !important; }
+        }
     </style>
 </head>
 <body>
@@ -44,7 +44,6 @@
         <div id="el-1" class="dropped-element"><p style="font-size: 47px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Please enable desktop mode for the best experience</p></div>
         <div id="el-2" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
         
-        <!-- Main Scrollable List -->
         <div id="el-3" class="dropped-element">
             <div id="scammer-list-content"></div>
         </div>
@@ -52,12 +51,10 @@
         <div id="el-4" class="dropped-element"><h2 style="font-size: 55px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Scammers</h2></div>
         <div id="el-5" class="dropped-element"><h2 style="font-size: 53px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">ဗီူဗီူ</h2></div>
 
-        <!-- SEARCH AREA -->
         <div id="el-10" class="dropped-element"><textarea id="search-input" placeholder="Enter text..." style="border: 1px solid rgb(204, 204, 204); border-radius: 12px; padding: 10px; width: 100%; height: 100%; resize: none; font-size: 14px; color: black;"></textarea></div>
         <div id="el-11" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
         <div id="el-12" class="dropped-element"><button id="search-btn" style="background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.0KdLlMlStFZ0B0USCObivAHaEk%3Fpid%3DApi&amp;f=1&amp;ipt=05455448d2ed135438a4d56f9e7a141d0335ac31cca8deec0a1488da7c41d2f0&amp;ipo=images') 0% 0% / cover rgb(79, 70, 229); color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 43px;">⌕</button></div>
 
-        <!-- INFO SECTION -->
         <div id="el-13" class="dropped-element">
             <div style="padding: 15px; color: #000;">
                 <p>## Scammer Hub: A Digital Shield Against Fraud... (content preserved)</p>
@@ -65,30 +62,20 @@
         </div>
     </div>
 
-    <!-- FIREBASE MODULE -->
     <script type="module">
-        // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+        import { initializeApp } from "firebase/app";
+        import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
-  authDomain: "quick-paste-f4483.firebaseapp.com",
-  databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
-  projectId: "quick-paste-f4483",
-  storageBucket: "quick-paste-f4483.firebasestorage.app",
-  messagingSenderId: "928918332296",
-  appId: "1:928918332296:web:327cf552fcaa93c351103d",
-  measurementId: "G-RWBRBS4NK8"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+        const firebaseConfig = {
+          apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
+          authDomain: "quick-paste-f4483.firebaseapp.com",
+          databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
+          projectId: "quick-paste-f4483",
+          storageBucket: "quick-paste-f4483.firebasestorage.app",
+          messagingSenderId: "928918332296",
+          appId: "1:928918332296:web:327cf552fcaa93c351103d",
+          measurementId: "G-RWBRBS4NK8"
+        };
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
@@ -100,7 +87,6 @@ const analytics = getAnalytics(app);
 
         let allScammers = [];
 
-        // Real-time listener
         onSnapshot(scammerCol, (snapshot) => {
             allScammers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             render(allScammers);
@@ -109,25 +95,29 @@ const analytics = getAnalytics(app);
         function render(data) {
             listContainer.innerHTML = '';
             data.forEach((scammer, index) => {
-                // We recreate your el-6, el-7, el-8, el-9 design for each scammer
                 const card = document.createElement('div');
                 card.className = 'scammer-card';
                 card.innerHTML = `
                     <div style="position:absolute; left:0; top:0; width:85%; height:100%; border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); border-radius: 12px; z-index:10;"></div>
-                    <h2 style="position:absolute; left:5%; top:16px; width:75%; font-size: 46px; color: black; z-index:40; margin:0;">${index + 1}. ${scammer.name}</h2>
-                    <button style="position:absolute; left:3%; top:181px; width:45%; height:79px; background: #4f46e5; color: white; border-radius: 12px; z-index:30; font-size: 29px; cursor:pointer;" onclick="window.open('${scammer.redirectUrl}', '_blank')">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
-                    <img src="${scammer.imageUrl}" style="position:absolute; left:65%; top:20px; width:100px; height:100px; border-radius: 12px; z-index:20; object-fit:cover;">
+                    <h2 style="position:absolute; left:5%; top:16px; width:75%; font-size: 46px; color: black; z-index:40; margin:0;">${index + 1}. ${scammer.name || 'Unknown'}</h2>
+                    <button class="social-btn" style="position:absolute; left:3%; top:181px; width:45%; height:79px; background: #4f46e5; color: white; border-radius: 12px; z-index:30; font-size: 29px; cursor:pointer;">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
+                    <img src="${scammer.imageUrl || ''}" style="position:absolute; left:65%; top:20px; width:100px; height:100px; border-radius: 12px; z-index:20; object-fit:cover;">
                 `;
+
+                const btn = card.querySelector('.social-btn');
+                btn.addEventListener('click', () => {
+                    if (scammer.redirectUrl) window.open(scammer.redirectUrl, '_blank');
+                });
+
                 listContainer.appendChild(card);
             });
         }
 
-        // Search logic
-        searchBtn.onclick = () => {
+        searchBtn.addEventListener('click', () => {
             const term = searchInput.value.toLowerCase();
-            const filtered = allScammers.filter(s => s.name.toLowerCase().includes(term));
+            const filtered = allScammers.filter(s => (s.name || "").toLowerCase().includes(term));
             render(filtered);
-        };
+        });
     </script>
 </body>
 </html>
