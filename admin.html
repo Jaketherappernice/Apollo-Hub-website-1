@@ -37,9 +37,7 @@
             margin-top: 0;
         }
 
-        .form-group {
-            margin-bottom: 20px;
-        }
+        .form-group { margin-bottom: 20px; }
 
         label {
             display: block;
@@ -60,9 +58,7 @@
             transition: border 0.3s;
         }
 
-        input:focus {
-            border-color: var(--neon-orange);
-        }
+        input:focus { border-color: var(--neon-orange); }
 
         .button-row {
             display: flex;
@@ -83,12 +79,12 @@
 
         button:active { transform: scale(0.98); }
 
-        #btn-add { background: var(--neon-orange); color: black; }
-        #btn-update { background: #444; color: white; cursor: not-allowed; }
-        #btn-delete { background: #b30000; color: white; cursor: not-allowed; }
+        #btn-add    { background: var(--neon-orange); color: black; }
+        #btn-update { background: #444; color: white; cursor: not-allowed; opacity: 0.5; }
+        #btn-delete { background: #b30000; color: white; cursor: not-allowed; opacity: 0.5; }
 
-        .active-btn { cursor: pointer !important; opacity: 1 !important; }
-        #btn-update.active-btn { background: #008cff; }
+        #btn-update.active-btn { background: #008cff; cursor: pointer; opacity: 1; }
+        #btn-delete.active-btn { cursor: pointer; opacity: 1; }
 
         .preview-box {
             width: 100px;
@@ -108,10 +104,7 @@
 
         .scammer-list-header { color: var(--neon-orange); margin-bottom: 15px; }
 
-        #scammer-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
+        #scammer-list { max-height: 400px; overflow-y: auto; }
 
         .list-item {
             background: #252525;
@@ -127,7 +120,6 @@
         }
 
         .list-item:hover { background: #333; border-left-color: var(--neon-orange); }
-
         .list-item.selected { border-left-color: #008cff; background: #2d2d2d; }
 
         .status-msg {
@@ -143,7 +135,7 @@
 
 <div class="admin-container">
     <h1>Apollo Scammer Admin</h1>
-    
+
     <div id="status" class="status-msg"></div>
 
     <div class="form-group">
@@ -155,7 +147,7 @@
         <label>Image URL</label>
         <input type="text" id="image-url" placeholder="Paste direct image link (jpg, png, etc)...">
         <div class="preview-box" id="preview-container">
-            <span style="color: #666; font-size: 12px;">No Image</span>
+            <span style="color:#666;font-size:12px;">No Image</span>
         </div>
     </div>
 
@@ -173,53 +165,41 @@
     <hr>
 
     <h3 class="scammer-list-header">Existing Profiles (Click to Edit)</h3>
-    <div id="scammer-list">
-        <!-- Scammers load here -->
-    </div>
+    <div id="scammer-list"></div>
 </div>
 
-<script type="module">
-    import { initializeApp } from "firebase/app";
-    import { 
-        getFirestore, 
-        collection, 
-        addDoc, 
-        onSnapshot, 
-        doc, 
-        updateDoc, 
-        deleteDoc 
-    } from "firebase/firestore";
+<!-- Firebase MUST be loaded before the script below -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
+<script>
     const firebaseConfig = {
-      apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
-      authDomain: "quick-paste-f4483.firebaseapp.com",
-      databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
-      projectId: "quick-paste-f4483",
-      storageBucket: "quick-paste-f4483.firebasestorage.app",
-      messagingSenderId: "928918332296",
-      appId: "1:928918332296:web:327cf552fcaa93c351103d",
-      measurementId: "G-RWBRBS4NK8"
+        apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
+        authDomain: "quick-paste-f4483.firebaseapp.com",
+        databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
+        projectId: "quick-paste-f4483",
+        storageBucket: "quick-paste-f4483.firebasestorage.app",
+        messagingSenderId: "928918332296",
+        appId: "1:928918332296:web:327cf552fcaa93c351103d",
+        measurementId: "G-RWBRBS4NK8"
     };
 
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const colRef = collection(db, "scammers");
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+    const colRef = db.collection("scammers");
 
-    const nameInput = document.getElementById('name');
-    const imgInput = document.getElementById('image-url');
-    const linkInput = document.getElementById('redirect-url');
+    const nameInput  = document.getElementById('name');
+    const imgInput   = document.getElementById('image-url');
+    const linkInput  = document.getElementById('redirect-url');
     const previewBox = document.getElementById('preview-container');
-    const listDiv = document.getElementById('scammer-list');
-    const statusDiv = document.getElementById('status');
-
-    const btnAdd = document.getElementById('btn-add');
-    const btnUpdate = document.getElementById('btn-update');
-    const btnDelete = document.getElementById('btn-delete');
+    const listDiv    = document.getElementById('scammer-list');
+    const statusDiv  = document.getElementById('status');
+    const btnAdd     = document.getElementById('btn-add');
+    const btnUpdate  = document.getElementById('btn-update');
+    const btnDelete  = document.getElementById('btn-delete');
 
     let selectedId = null;
 
-    // --- HELPER: Status Message ---
     function showStatus(text, isError = false) {
         statusDiv.innerText = text;
         statusDiv.style.display = 'block';
@@ -227,94 +207,98 @@
         setTimeout(() => { statusDiv.style.display = 'none'; }, 3000);
     }
 
-    // --- PREVIEW LOGIC ---
     imgInput.addEventListener('input', () => {
-        if (imgInput.value) {
-            previewBox.innerHTML = `<img src="${imgInput.value}" onerror="this.src='https://via.placeholder.com/100?text=Invalid+URL'">`;
-        } else {
-            previewBox.innerHTML = `<span style="color: #666; font-size: 12px;">No Image</span>`;
-        }
+        const val = imgInput.value.trim();
+        previewBox.innerHTML = val
+            ? `<img src="${val}" onerror="this.src='https://via.placeholder.com/100?text=Bad+URL'">`
+            : `<span style="color:#666;font-size:12px;">No Image</span>`;
     });
 
-    // --- READ: Real-time List ---
-    onSnapshot(colRef, (snapshot) => {
+    colRef.orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
         listDiv.innerHTML = '';
-        snapshot.docs.forEach(docSnap => {
+        snapshot.forEach(docSnap => {
             const data = docSnap.data();
             const div = document.createElement('div');
             div.className = 'list-item';
             div.innerHTML = `
                 <span><strong>${data.name}</strong></span>
-                <span style="font-size: 12px; color: #888;">${docSnap.id.substring(0,6)}...</span>
+                <span style="font-size:12px;color:#888;">${docSnap.id.substring(0, 6)}...</span>
             `;
-            // Fixed onclick for modules
             div.addEventListener('click', () => selectScammer(docSnap.id, data, div));
             listDiv.appendChild(div);
         });
+    }, (err) => {
+        showStatus("Firestore error: " + err.message, true);
+        console.error(err);
     });
 
     function selectScammer(id, data, element) {
         selectedId = id;
-        nameInput.value = data.name;
-        imgInput.value = data.imageUrl;
-        linkInput.value = data.redirectUrl;
-        previewBox.innerHTML = `<img src="${data.imageUrl}">`;
+        nameInput.value  = data.name || '';
+        imgInput.value   = data.imageUrl || '';
+        linkInput.value  = data.redirectUrl || '';
+        previewBox.innerHTML = data.imageUrl
+            ? `<img src="${data.imageUrl}" onerror="this.src='https://via.placeholder.com/100?text=Bad+URL'">`
+            : `<span style="color:#666;font-size:12px;">No Image</span>`;
 
         btnUpdate.disabled = false;
         btnDelete.disabled = false;
         btnUpdate.classList.add('active-btn');
         btnDelete.classList.add('active-btn');
-        
+
         document.querySelectorAll('.list-item').forEach(el => el.classList.remove('selected'));
         element.classList.add('selected');
     }
 
-    // --- CREATE ---
-    btnAdd.onclick = async () => {
-        if (!nameInput.value || !imgInput.value || !linkInput.value) return showStatus("Fill all fields!", true);
-        
+    btnAdd.addEventListener('click', async () => {
+        const name = nameInput.value.trim();
+        const imageUrl = imgInput.value.trim();
+        const redirectUrl = linkInput.value.trim();
+        if (!name || !imageUrl || !redirectUrl) return showStatus("Fill all fields!", true);
         try {
-            await addDoc(colRef, {
-                name: nameInput.value,
-                imageUrl: imgInput.value,
-                redirectUrl: linkInput.value,
-                timestamp: Date.now()
-            });
+            await colRef.add({ name, imageUrl, redirectUrl, timestamp: Date.now() });
             clearForm();
             showStatus("Scammer Added!");
-        } catch (e) { showStatus("Error adding data", true); }
-    };
+        } catch (e) {
+            showStatus("Error: " + e.message, true);
+            console.error(e);
+        }
+    });
 
-    // --- UPDATE ---
-    btnUpdate.onclick = async () => {
+    btnUpdate.addEventListener('click', async () => {
         if (!selectedId) return;
+        const name = nameInput.value.trim();
+        const imageUrl = imgInput.value.trim();
+        const redirectUrl = linkInput.value.trim();
+        if (!name || !imageUrl || !redirectUrl) return showStatus("Fill all fields!", true);
         try {
-            const docRef = doc(db, "scammers", selectedId);
-            await updateDoc(docRef, {
-                name: nameInput.value,
-                imageUrl: imgInput.value,
-                redirectUrl: linkInput.value
-            });
+            await colRef.doc(selectedId).update({ name, imageUrl, redirectUrl });
             showStatus("Profile Updated!");
             clearForm();
-        } catch (e) { showStatus("Update failed", true); }
-    };
+        } catch (e) {
+            showStatus("Update failed: " + e.message, true);
+            console.error(e);
+        }
+    });
 
-    // --- DELETE ---
-    btnDelete.onclick = async () => {
-        if (!selectedId || !confirm("Delete this scammer permanently?")) return;
+    btnDelete.addEventListener('click', async () => {
+        if (!selectedId) return;
+        if (!confirm("Delete this scammer permanently?")) return;
         try {
-            await deleteDoc(doc(db, "scammers", selectedId));
+            await colRef.doc(selectedId).delete();
             showStatus("Deleted Successfully");
             clearForm();
-        } catch (e) { showStatus("Delete failed", true); }
-    };
+        } catch (e) {
+            showStatus("Delete failed: " + e.message, true);
+            console.error(e);
+        }
+    });
 
     function clearForm() {
-        nameInput.value = '';
-        imgInput.value = '';
-        linkInput.value = '';
-        previewBox.innerHTML = `<span style="color: #666; font-size: 12px;">No Image</span>`;
+        nameInput.value  = '';
+        imgInput.value   = '';
+        linkInput.value  = '';
+        previewBox.innerHTML = `<span style="color:#666;font-size:12px;">No Image</span>`;
         selectedId = null;
         btnUpdate.disabled = true;
         btnDelete.disabled = true;
