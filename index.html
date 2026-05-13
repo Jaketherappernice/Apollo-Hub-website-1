@@ -31,17 +31,26 @@
             #el-1 { left:-22.1094%; top:148px; width:26.5088%; height:399.353px; z-index:40 !important; opacity:1; }
             #el-1 > * { font-size:47px !important; }
             #el-2 { left:-26.1719%; top:552px; width:25.7333%; height:569.78px; z-index:10 !important; opacity:1; }
-            #el-3 { left:37.5781%; top:149px; width:58.1416%; height:1506.34px; z-index:10 !important; opacity:1; overflow-y: auto; display: block; padding: 20px; }
+            
+            /* FIXED CONTAINER: Adjusted top and height to prevent overlaying search */
+            #el-3 { left:37.5781%; top:380px; width:58.1416%; height:1300px; z-index:5 !important; opacity:1; overflow-y: auto; display: block; padding: 20px; }
+            
             #el-4 { left:41.0156%; top:200px; width:24.2505%; height:65.1177px; z-index:40 !important; opacity:1; }
             #el-4 > * { font-size:55px !important; }
             #el-5 { left:64.3750%; top:180px; width:7.5620%; height:115.79px; z-index:40 !important; opacity:1; }
             #el-5 > * { font-size:53px !important; }
             #el-6, #el-7, #el-8, #el-9 { display: none !important; }
-            #el-10 { left:43.9063%; top:304px; width:37.3073%; height:52.0078px; z-index:40 !important; opacity:1; }
+            
+            /* SEARCH AREA: Ensured high z-index */
+            #el-10 { left:43.9063%; top:304px; width:37.3073%; height:52.0078px; z-index:50 !important; opacity:1; }
             #el-10 > * { font-size:14px !important; -webkit-text-fill-color: initial !important; color: black !important; }
+            
             #el-11 { left:3.0469%; top:200px; width:25.1323%; height:1365.53px; z-index:10 !important; opacity:1; }
-            #el-12 { left:83.6719%; top:284px; width:9.5500%; height:84.675px; z-index:30 !important; opacity:1; }
+            
+            /* SEARCH BUTTON: Ensured high z-index */
+            #el-12 { left:83.6719%; top:284px; width:9.5500%; height:84.675px; z-index:50 !important; opacity:1; }
             #el-12 > * { font-size:43px !important; }
+            
             #el-13 { left:6.4062%; top:278px; width:17.4629%; height:1253.97px; z-index:40 !important; opacity:1; overflow-y: auto; }
             #el-13 > * { font-size:16px !important; }
         }
@@ -77,10 +86,8 @@
     <!-- FIREBASE MODULE -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Updated Firebase configuration
         const firebaseConfig = {
           apiKey: "AIzaSyDY_qdBhl3OV_Poxw4hUinGkuaVudybQEU",
           authDomain: "scammer-hubby.firebaseapp.com",
@@ -91,9 +98,7 @@
           measurementId: "G-NCR9S5LLFE"
         };
 
-        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
         const db = getFirestore(app);
         const scammerCol = collection(db, "scammers");
 
@@ -103,7 +108,6 @@
 
         let allScammers = [];
 
-        // Real-time listener
         onSnapshot(scammerCol, (snapshot) => {
             allScammers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             displayScammers(allScammers);
