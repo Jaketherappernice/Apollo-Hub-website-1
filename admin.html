@@ -3,310 +3,178 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apollo Hub | Admin Panel</title>
+    <title>Scammer Hub - Admin Panel</title>
     <style>
-        :root {
-            --neon-orange: #ff8c00;
-            --dark-bg: #121212;
-            --surface: #1e1e1e;
-        }
-
-        body {
-            margin: 0;
-            padding: 20px;
-            background-color: var(--dark-bg);
-            color: #ffffff;
+        body, html { 
+            margin: 0; 
+            padding: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: linear-gradient(135deg, #000000 0%, #ff6600 100%); 
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .admin-container {
-            max-width: 900px;
-            margin: 0 auto;
-            border: 2px solid var(--neon-orange);
-            border-radius: 15px;
-            padding: 30px;
-            background: var(--surface);
-            box-shadow: 0 0 20px rgba(255, 140, 0, 0.2);
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            border: 2px solid #ff6600;
+            box-shadow: 0 0 20px rgba(255, 102, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
         }
 
         h1 {
-            color: var(--neon-orange);
-            text-align: center;
+            color: #ff6600;
+            margin-bottom: 30px;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-top: 0;
         }
 
-        .form-group { margin-bottom: 20px; }
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
 
         label {
             display: block;
-            color: var(--neon-orange);
             margin-bottom: 8px;
+            color: #ff6600;
             font-weight: bold;
         }
 
         input {
             width: 100%;
             padding: 12px;
-            background: #2a2a2a;
-            border: 1px solid #444;
             border-radius: 8px;
+            border: 1px solid #ff6600;
+            background: #111;
             color: white;
             box-sizing: border-box;
             outline: none;
-            transition: border 0.3s;
         }
 
-        input:focus { border-color: var(--neon-orange); }
-
-        .button-row {
-            display: flex;
-            gap: 10px;
-            margin-top: 25px;
+        input:focus {
+            box-shadow: 0 0 10px #ff6600;
         }
 
         button {
-            flex: 1;
+            width: 100%;
             padding: 15px;
+            background: #ff6600;
+            color: black;
             border: none;
             border-radius: 8px;
-            cursor: pointer;
             font-weight: bold;
-            text-transform: uppercase;
-            transition: transform 0.1s, opacity 0.2s;
-        }
-
-        button:active { transform: scale(0.98); }
-
-        #btn-add    { background: var(--neon-orange); color: black; }
-        #btn-update { background: #444; color: white; cursor: not-allowed; opacity: 0.5; }
-        #btn-delete { background: #b30000; color: white; cursor: not-allowed; opacity: 0.5; }
-
-        #btn-update.active-btn { background: #008cff; cursor: pointer; opacity: 1; }
-        #btn-delete.active-btn { cursor: pointer; opacity: 1; }
-
-        .preview-box {
-            width: 100px;
-            height: 100px;
-            border: 2px dashed #444;
-            border-radius: 12px;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        .preview-box img { width: 100%; height: 100%; object-fit: cover; }
-
-        hr { border: 0; border-top: 1px solid #444; margin: 30px 0; }
-
-        .scammer-list-header { color: var(--neon-orange); margin-bottom: 15px; }
-
-        #scammer-list { max-height: 400px; overflow-y: auto; }
-
-        .list-item {
-            background: #252525;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 4px solid transparent;
+            font-size: 16px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: 0.3s;
+            margin-top: 10px;
         }
 
-        .list-item:hover { background: #333; border-left-color: var(--neon-orange); }
-        .list-item.selected { border-left-color: #008cff; background: #2d2d2d; }
+        button:hover {
+            background: #fff;
+            box-shadow: 0 0 15px #fff;
+        }
 
-        .status-msg {
-            text-align: center;
-            padding: 10px;
-            margin-top: 10px;
-            border-radius: 5px;
-            display: none;
+        #status-msg {
+            margin-top: 20px;
+            font-size: 14px;
         }
     </style>
 </head>
 <body>
 
-<div class="admin-container">
-    <h1>Apollo Scammer Admin</h1>
-
-    <div id="status" class="status-msg"></div>
-
-    <div class="form-group">
-        <label>Scammer Name</label>
-        <input type="text" id="name" placeholder="Enter name or alias...">
-    </div>
-
-    <div class="form-group">
-        <label>Image URL</label>
-        <input type="text" id="image-url" placeholder="Paste direct image link (jpg, png, etc)...">
-        <div class="preview-box" id="preview-container">
-            <span style="color:#666;font-size:12px;">No Image</span>
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+        
+        <div class="input-group">
+            <label>Scammer Name</label>
+            <input type="text" id="scammer-name" placeholder="Enter full name...">
         </div>
+
+        <div class="input-group">
+            <label>Image URL</label>
+            <input type="text" id="scammer-image" placeholder="https://image-link.com/photo.jpg">
+        </div>
+
+        <div class="input-group">
+            <label>Redirect/Info URL</label>
+            <input type="text" id="scammer-url" placeholder="https://social-link.com/profile">
+        </div>
+
+        <button id="btn-add">ADD TO DATABASE</button>
+        
+        <p id="status-msg"></p>
+        
+        <a href="index.html" style="color: #ff6600; text-decoration: none; font-size: 12px; display: block; margin-top: 20px;">← Back to Home Page</a>
     </div>
 
-    <div class="form-group">
-        <label>Redirect URL (Info Link)</label>
-        <input type="text" id="redirect-url" placeholder="https://social-media-link.com/profile">
-    </div>
+    <!-- FIREBASE MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-    <div class="button-row">
-        <button id="btn-add">Add New</button>
-        <button id="btn-update" disabled>Update</button>
-        <button id="btn-delete" disabled>Delete</button>
-    </div>
+        // Your provided Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyDY_qdBhl3OV_Poxw4hUinGkuaVudybQEU",
+          authDomain: "scammer-hubby.firebaseapp.com",
+          projectId: "scammer-hubby",
+          storageBucket: "scammer-hubby.firebasestorage.app",
+          messagingSenderId: "343577013334",
+          appId: "1:343577013334:web:9d495ca0342ea3972f1ff7",
+          measurementId: "G-NCR9S5LLFE"
+        };
 
-    <hr>
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const scammerCol = collection(db, "scammers");
 
-    <h3 class="scammer-list-header">Existing Profiles (Click to Edit)</h3>
-    <div id="scammer-list"></div>
-</div>
+        const btnAdd = document.getElementById('btn-add');
+        const statusMsg = document.getElementById('status-msg');
 
-<!-- Firebase MUST be loaded before the script below -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+        btnAdd.addEventListener('click', async () => {
+            const name = document.getElementById('scammer-name').value;
+            const imageUrl = document.getElementById('scammer-image').value;
+            const redirectUrl = document.getElementById('scammer-url').value;
 
-<script>
-    const firebaseConfig = {
-        apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
-        authDomain: "quick-paste-f4483.firebaseapp.com",
-        databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
-        projectId: "quick-paste-f4483",
-        storageBucket: "quick-paste-f4483.firebasestorage.app",
-        messagingSenderId: "928918332296",
-        appId: "1:928918332296:web:327cf552fcaa93c351103d",
-        measurementId: "G-RWBRBS4NK8"
-    };
+            if(!name || !imageUrl || !redirectUrl) {
+                statusMsg.style.color = "red";
+                statusMsg.innerText = "Please fill in all fields.";
+                return;
+            }
 
-    firebase.initializeApp(firebaseConfig);
-    const db = firebase.firestore();
-    const colRef = db.collection("scammers");
+            try {
+                statusMsg.style.color = "yellow";
+                statusMsg.innerText = "Uploading...";
+                
+                await addDoc(scammerCol, {
+                    name: name,
+                    imageUrl: imageUrl,
+                    redirectUrl: redirectUrl,
+                    timestamp: new Date()
+                });
 
-    const nameInput  = document.getElementById('name');
-    const imgInput   = document.getElementById('image-url');
-    const linkInput  = document.getElementById('redirect-url');
-    const previewBox = document.getElementById('preview-container');
-    const listDiv    = document.getElementById('scammer-list');
-    const statusDiv  = document.getElementById('status');
-    const btnAdd     = document.getElementById('btn-add');
-    const btnUpdate  = document.getElementById('btn-update');
-    const btnDelete  = document.getElementById('btn-delete');
-
-    let selectedId = null;
-
-    function showStatus(text, isError = false) {
-        statusDiv.innerText = text;
-        statusDiv.style.display = 'block';
-        statusDiv.style.background = isError ? '#b30000' : '#00b341';
-        setTimeout(() => { statusDiv.style.display = 'none'; }, 3000);
-    }
-
-    imgInput.addEventListener('input', () => {
-        const val = imgInput.value.trim();
-        previewBox.innerHTML = val
-            ? `<img src="${val}" onerror="this.src='https://via.placeholder.com/100?text=Bad+URL'">`
-            : `<span style="color:#666;font-size:12px;">No Image</span>`;
-    });
-
-    colRef.orderBy('timestamp', 'desc').onSnapshot((snapshot) => {
-        listDiv.innerHTML = '';
-        snapshot.forEach(docSnap => {
-            const data = docSnap.data();
-            const div = document.createElement('div');
-            div.className = 'list-item';
-            div.innerHTML = `
-                <span><strong>${data.name}</strong></span>
-                <span style="font-size:12px;color:#888;">${docSnap.id.substring(0, 6)}...</span>
-            `;
-            div.addEventListener('click', () => selectScammer(docSnap.id, data, div));
-            listDiv.appendChild(div);
+                statusMsg.style.color = "#00ff00";
+                statusMsg.innerText = "Successfully added to Scammer Hub!";
+                
+                // Clear inputs
+                document.getElementById('scammer-name').value = '';
+                document.getElementById('scammer-image').value = '';
+                document.getElementById('scammer-url').value = '';
+                
+            } catch (error) {
+                console.error(error);
+                statusMsg.style.color = "red";
+                statusMsg.innerText = "Error: " + error.message;
+            }
         });
-    }, (err) => {
-        showStatus("Firestore error: " + err.message, true);
-        console.error(err);
-    });
-
-    function selectScammer(id, data, element) {
-        selectedId = id;
-        nameInput.value  = data.name || '';
-        imgInput.value   = data.imageUrl || '';
-        linkInput.value  = data.redirectUrl || '';
-        previewBox.innerHTML = data.imageUrl
-            ? `<img src="${data.imageUrl}" onerror="this.src='https://via.placeholder.com/100?text=Bad+URL'">`
-            : `<span style="color:#666;font-size:12px;">No Image</span>`;
-
-        btnUpdate.disabled = false;
-        btnDelete.disabled = false;
-        btnUpdate.classList.add('active-btn');
-        btnDelete.classList.add('active-btn');
-
-        document.querySelectorAll('.list-item').forEach(el => el.classList.remove('selected'));
-        element.classList.add('selected');
-    }
-
-    btnAdd.addEventListener('click', async () => {
-        const name = nameInput.value.trim();
-        const imageUrl = imgInput.value.trim();
-        const redirectUrl = linkInput.value.trim();
-        if (!name || !imageUrl || !redirectUrl) return showStatus("Fill all fields!", true);
-        try {
-            await colRef.add({ name, imageUrl, redirectUrl, timestamp: Date.now() });
-            clearForm();
-            showStatus("Scammer Added!");
-        } catch (e) {
-            showStatus("Error: " + e.message, true);
-            console.error(e);
-        }
-    });
-
-    btnUpdate.addEventListener('click', async () => {
-        if (!selectedId) return;
-        const name = nameInput.value.trim();
-        const imageUrl = imgInput.value.trim();
-        const redirectUrl = linkInput.value.trim();
-        if (!name || !imageUrl || !redirectUrl) return showStatus("Fill all fields!", true);
-        try {
-            await colRef.doc(selectedId).update({ name, imageUrl, redirectUrl });
-            showStatus("Profile Updated!");
-            clearForm();
-        } catch (e) {
-            showStatus("Update failed: " + e.message, true);
-            console.error(e);
-        }
-    });
-
-    btnDelete.addEventListener('click', async () => {
-        if (!selectedId) return;
-        if (!confirm("Delete this scammer permanently?")) return;
-        try {
-            await colRef.doc(selectedId).delete();
-            showStatus("Deleted Successfully");
-            clearForm();
-        } catch (e) {
-            showStatus("Delete failed: " + e.message, true);
-            console.error(e);
-        }
-    });
-
-    function clearForm() {
-        nameInput.value  = '';
-        imgInput.value   = '';
-        linkInput.value  = '';
-        previewBox.innerHTML = `<span style="color:#666;font-size:12px;">No Image</span>`;
-        selectedId = null;
-        btnUpdate.disabled = true;
-        btnDelete.disabled = true;
-        btnUpdate.classList.remove('active-btn');
-        btnDelete.classList.remove('active-btn');
-        document.querySelectorAll('.list-item').forEach(el => el.classList.remove('selected'));
-    }
-</script>
-
+    </script>
 </body>
 </html>
