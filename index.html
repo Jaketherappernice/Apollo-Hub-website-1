@@ -3,183 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apollo Hub | Premium Web Development</title>
-    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #0f172a;
-            color: #e2e8f0;
-            overflow-x: hidden;
+        body, html { margin:0; padding:0; width:100%; min-height:100%; overflow-x:hidden; background:#fff; font-family: sans-serif; }
+        #site-canvas { position:relative; width:100%; max-width:1440px; height:1800px; background-color:white; background-image:url("https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.0gtDydRfHyNl0ocnAYRyOAHaEc%3Fpid%3DApi&f=1&ipt=b623b623ffee5cc9b46ab949dd634b5cf7d494e56251b5c91a7a1697d0981b88&ipo=images"); background-size:cover; background-position:center; margin:0 auto; overflow:hidden; }
+        .dropped-element { position:absolute; display:flex; align-items:center; justify-content:center; box-sizing: border-box; transition: opacity 0.2s; }
+        .dropped-element > * { width:100%; height:100%; object-fit:cover; border-radius:12px; border:none; margin:0; box-sizing: border-box; }
+        textarea { resize: none; box-sizing: border-box; padding: 10px; }
+        button { cursor: pointer; transition: transform 0.1s; background-size: cover; background-position: center; }
+        button:active { transform: scale(0.98); }
+
+        /* Specific styles for dynamic cards in el-3 */
+        .scammer-entry {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px solid #333;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 10px;
+            width: 95%;
+            gap: 15px;
         }
-        
-        .gradient-text {
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgba(99, 102, 241, 0.1), 0 10px 10px -5px rgba(99, 102, 241, 0.04);
-        }
-        
-        .floating {
-            animation: floating 6s ease-in-out infinite;
-        }
-        
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
+
+        @media (min-width: 601px) { #site-canvas { width: 100%; } #el-0 { left:2.0313%; top:22px; width:31.0698%; height:69.1302px; z-index:40 !important; opacity:1; }
+#el-0 > * { font-size:44px !important; }
+#el-1 { left:-22.1094%; top:148px; width:26.5088%; height:399.353px; z-index:40 !important; opacity:1; }
+#el-1 > * { font-size:47px !important; }
+#el-2 { left:-26.1719%; top:552px; width:25.7333%; height:569.78px; z-index:10 !important; opacity:1; }
+#el-3 { left:37.5781%; top:149px; width:58.1416%; height:1506.34px; z-index:10 !important; opacity:1; overflow-y: auto; display: block; padding: 20px; }
+#el-4 { left:41.0156%; top:200px; width:24.2505%; height:65.1177px; z-index:40 !important; opacity:1; }
+#el-4 > * { font-size:55px !important; }
+#el-5 { left:64.3750%; top:180px; width:7.5620%; height:115.79px; z-index:40 !important; opacity:1; }
+#el-5 > * { font-size:53px !important; }
+/* Hiding templates el-6 to el-9 so they don't overlap the dynamic list */
+#el-6, #el-7, #el-8, #el-9 { display: none !important; }
+#el-10 { left:43.9063%; top:304px; width:37.3073%; height:52.0078px; z-index:40 !important; opacity:1; }
+#el-10 > * { font-size:14px !important; -webkit-text-fill-color: initial !important; color: black !important; }
+#el-11 { left:3.0469%; top:200px; width:25.1323%; height:1365.53px; z-index:10 !important; opacity:1; }
+#el-12 { left:83.6719%; top:284px; width:9.5500%; height:84.675px; z-index:30 !important; opacity:1; }
+#el-12 > * { font-size:43px !important; }
+#el-13 { left:6.4062%; top:278px; width:17.4629%; height:1253.97px; z-index:40 !important; opacity:1; overflow-y: auto; }
+#el-13 > * { font-size:16px !important; }
+ }
     </style>
 </head>
 <body>
-    <header class="bg-gray-900 border-b border-gray-800">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9h2m12 0h2M5 15h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2z" />
-                    </svg>
-                    <span class="ml-2 text-2xl font-bold gradient-text">Apollo Hub</span>
-                </div>
-                <nav class="hidden md:block">
-                    <ul class="flex space-x-8">
-                        <li><a href="#services" class="hover:text-indigo-400 transition duration-200">Services</a></li>
-                        <li><a href="#offers" class="hover:text-indigo-400 transition duration-200">Offers</a></li>
-                        <li><a href="#work" class="hover:text-indigo-400 transition duration-200">Our Work</a></li>
-                        <li><a href="#contact" class="hover:text-indigo-400 transition duration-200">Contact</a></li>
-                    </ul>
-                </nav>
-                <button class="md:hidden focus:outline-none">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
+    <div id="site-canvas">
+        <div id="el-0" class="dropped-element"><h2 style="font-size: 44px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">𝚂𝚌𝚊𝚖𝚖𝚎𝚛 𝙷𝚞𝚋</h2></div>
+        <div id="el-1" class="dropped-element"><p style="font-size: 47px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.lcuLx4YdhKJdDxaFxHVLwAHaF7%3Fr%3D0%26pid%3DApi&amp;f=1&amp;ipt=3dc6da0c31f24298006fbc053a5f288feec876ca88cf6c44bbd6cb5a23e2be3a&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Please enable desktop mode for the best experience</p></div>
+        
+        <div id="el-2" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
+        
+        <!-- MAIN DYNAMIC LIST CONTAINER -->
+        <div id="el-3" class="dropped-element">
+            <div id="scammer-list" style="width:100%;"></div>
+        </div>
+
+        <div id="el-4" class="dropped-element"><h2 style="font-size: 55px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">Scammers</h2></div>
+        <div id="el-5" class="dropped-element"><h2 style="font-size: 53px; color: rgb(0, 0, 0); background-image: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%2Fid%2FOIP.zD0TYGY1gkPG974wz1AiYgHaHa%3Fpid%3DApi&amp;f=1&amp;ipt=b29c01575d4ddfbee33e184d3a5d16b4f867db3ef3b326aad0b20b09a868e99d&amp;ipo=images'); background-clip: text; -webkit-text-fill-color: transparent; background-size: cover; background-position: center center;">ဗီူဗီူ</h2></div>
+
+        <!-- SEARCH AREA -->
+        <div id="el-10" class="dropped-element"><textarea id="search-box" placeholder="Search scammer by name..."></textarea></div>
+        <div id="el-11" class="dropped-element"><div style="border: 2px solid rgb(51, 51, 51); background: rgba(0, 0, 0, 0.05); width: 100%; height: 100%; border-radius: 12px;"></div></div>
+        <div id="el-12" class="dropped-element"><button id="btn-search" style="background: url('https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%2Fid%2FOIP.0KdLlMlStFZ0B0USCObivAHaEk%3Fpid%3DApi&amp;f=1&amp;ipt=05455448d2ed135438a4d56f9e7a141d0335ac31cca8deec0a1488da7c41d2f0&amp;ipo=images') center/cover; color: white; border: none; border-radius: 12px; width: 100%; height: 100%; cursor: pointer; font-size: 43px;">⌕</button></div>
+
+        <!-- INFO SECTION -->
+        <div id="el-13" class="dropped-element">
+            <div style="padding: 15px; color: #000;">
+                <p>## Scammer Hub: A Digital Shield Against Fraud<br><br>In today’s interconnected world, scams have become increasingly sophisticated... (Apollo Hub content preserved)</p>
             </div>
         </div>
-    </header>
+    </div>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="py-20 px-6">
-            <div class="container mx-auto flex flex-col md:flex-row items-center">
-                <div class="md:w-1/2 mb-12 md:mb-0">
-                    <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">Crafting Digital <span class="gradient-text">Experiences</span> That Matter</h1>
-                    <p class="text-xl text-gray-400 mb-8">We transform your vision into pixel-perfect reality with cutting-edge web solutions tailored to your business needs.</p>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="#contact" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition duration-200">Start Now</a>
-                        <a href="#work" class="border border-gray-700 hover:border-indigo-500 text-white font-bold py-3 px-8 rounded-lg transition duration-200">See Our Work</a>
-                    </div>
-                </div>
-                <div class="md:w-1/2 flex justify-center">
-                    <div class="relative floating">
-                        <div class="absolute -top-8 -left-8 w-64 h-64 bg-indigo-900 rounded-full opacity-20 blur-3xl"></div>
-                        <div class="absolute -bottom-8 -right-8 w-64 h-64 bg-blue-900 rounded-full opacity-20 blur-3xl"></div>
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/105a5fa3-5b95-4fd6-bfa4-7f48a2fcfe1c.png" alt="Developer working on multiple screens showing code and responsive website designs" class="relative z-10 rounded-lg shadow-2xl border border-gray-800" />
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- FIREBASE MODULE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        <!-- Services Section -->
-        <section id="services" class="py-20 bg-gray-900 px-6">
-            <div class="container mx-auto">
-                <div class
-<div class="text-center mb-12">
-                    <h2 class="text-4xl font-bold gradient-text">Our Services</h2>
-                    <p class="text-gray-400 mt-4 text-lg">Custom web solutions designed to elevate your online presence.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-800 p-6 rounded-lg service-card transition transform duration-300">
-                        <h3 class="text-2xl font-semibold mb-4">Website Design</h3>
-                        <p class="text-gray-400">Modern, responsive designs that reflect your brand and engage users across all devices.</p>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-lg service-card transition transform duration-300">
-                        <h3 class="text-2xl font-semibold mb-4">Web Development</h3>
-                        <p class="text-gray-400">Fast, secure, and scalable websites built using the latest technologies.</p>
-                    </div>
-                    <div class="bg-gray-800 p-6 rounded-lg service-card transition transform duration-300">
-                        <h3 class="text-2xl font-semibold mb-4">SEO Optimization</h3>
-                        <p class="text-gray-400">Improve your visibility on search engines and attract more organic traffic.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Your provided Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyCp0EIUq7CD0PXFOm6LjxbmdXZw1h_8aLw",
+          authDomain: "quick-paste-f4483.firebaseapp.com",
+          databaseURL: "https://quick-paste-f4483-default-rtdb.firebaseio.com",
+          projectId: "quick-paste-f4483",
+          storageBucket: "quick-paste-f4483.firebasestorage.app",
+          messagingSenderId: "928918332296",
+          appId: "1:928918332296:web:337a5c186e4ec0df51103d",
+          measurementId: "G-VT5SFM778L"
+        };
 
-        <!-- Offers Section -->
-        <section id="offers" class="py-20 px-6">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold gradient-text mb-6">Special Offers</h2>
-                <p class="text-gray-400 text-lg mb-12">Get exclusive deals when you start a project with us today.</p>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                    <div class="bg-indigo-600 p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold mb-2 text-white">Starter Bundle</h3>
-                        <p class="text-white mb-4">Perfect for small businesses or portfolios. One-page design & basic SEO.</p>
-                        <span class="block text-white text-3xl font-bold">$199</span>
-                    </div>
-                    <div class="bg-purple-600 p-6 rounded-lg shadow-lg">
-                        <h3 class="text-2xl font-bold mb-2 text-white">Pro Launch</h3>
-                        <p class="text-white mb-4">Custom multi-page site, full SEO setup, and performance optimization.</p>
-                        <span class="block text-white text-3xl font-bold">$499</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const scammerCol = collection(db, "scammers");
 
-        <!-- Our Work Section -->
-        <section id="work" class="py-20 bg-gray-900 px-6">
-            <div class="container mx-auto text-center">
-                <h2 class="text-4xl font-bold gradient-text mb-6">Our Work</h2>
-                <p class="text-gray-400 text-lg mb-12">Take a look at some of our recent projects and success stories.</p>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <img src="https://via.placeholder.com/300x200" alt="Project Screenshot" class="rounded mb-4" />
-                        <h3 class="text-xl font-semibold">E-Commerce Redesign</h3>
-                        <p class="text-gray-400 text-sm">Boosted conversions by 60% for an online fashion brand.</p>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <img src="https://via.placeholder.com/300x200" alt="Project Screenshot" class="rounded mb-4" />
-                        <h3 class="text-xl font-semibold">Portfolio Showcase</h3>
-                        <p class="text-gray-400 text-sm">Clean, modern site for a freelance photographer.</p>
-                    </div>
-                    <div class="bg-gray-800 p-4 rounded-lg">
-                        <img src="https://via.placeholder.com/300x200" alt="Project Screenshot" class="rounded mb-4" />
-                        <h3 class="text-xl font-semibold">Startup Launch</h3>
-                        <p class="text-gray-400 text-sm">Full site build and launch for a SaaS startup.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+        const listElement = document.getElementById('scammer-list');
+        const searchBtn = document.getElementById('btn-search');
+        const searchBox = document.getElementById('search-box');
 
-        <!-- Contact Section -->
-        <section id="contact" class="py-20 px-6">
-            <div class="container mx-auto text-center max-w-xl">
-                <h2 class="text-4xl font-bold gradient-text mb-6">Let's Work Together</h2>
-                <p class="text-gray-400 text-lg mb-8">Fill out the form below and we'll get back to you within 24 hours.</p>
-                <form action="https://formspree.io/f/xrbkdepy" method="POST" class="space-y-6">
-    <input type="text" name="name" placeholder="Your Name" required
-        class="w-full px-4 py-3 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-    <input type="email" name="email" placeholder="Your Email" required
-        class="w-full px-4 py-3 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500" />
-    <textarea name="message" placeholder="Your Message" rows="4" required
-        class="w-full px-4 py-3 rounded bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500"></textarea>
-    <button type="submit"
-        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-8 rounded-lg transition duration-200">
-        Send Message
-    </button>
-</form>
-            </div>
-        </section>
-    </main>
+        let allScammers = [];
 
-    <footer class="bg-gray-800 text-center py-6">
-        <p class="text-gray-400">&copy; 2025 Apollo Hub. All rights reserved.</p>
-    </footer>
+        // Real-time listener for updates
+        onSnapshot(scammerCol, (snapshot) => {
+            allScammers = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            displayScammers(allScammers);
+        });
+
+        function displayScammers(scammers) {
+            listElement.innerHTML = '';
+            scammers.forEach((scammer, index) => {
+                const card = document.createElement('div');
+                card.className = 'scammer-entry';
+                card.innerHTML = `
+                    <img src="${scammer.imageUrl || 'https://via.placeholder.com/150'}" style="width:100px; height:100px; border-radius:12px; object-fit:cover;">
+                    <div style="flex-grow:1;">
+                        <h2 style="font-size:24px; margin:0 0 10px 0;">${index + 1}. ${scammer.name}</h2>
+                        <button onclick="window.open('${scammer.redirectUrl}', '_blank')" style="background:#4f46e5; color:white; padding:10px 15px; border-radius:8px; width:auto; height:auto; cursor:pointer;">𝕊𝕠𝕔𝕚𝕒𝕝 𝕝𝕚𝕟𝕜𝕤 𝕒𝕟𝕕 𝕀𝕟𝕗𝕠𝕣𝕞𝕒𝕥𝕚𝕠𝕟</button>
+                    </div>
+                `;
+                listElement.appendChild(card);
+            });
+        }
+
+        // Search logic
+        searchBtn.addEventListener('click', () => {
+            const term = searchBox.value.toLowerCase();
+            const filtered = allScammers.filter(s => s.name.toLowerCase().includes(term));
+            displayScammers(filtered);
+        });
+    </script>
 </body>
 </html>
